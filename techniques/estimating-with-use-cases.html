@@ -1,0 +1,187 @@
+<html>
+
+<head>
+<title>Estimating with Use Cases</title>
+</head>
+
+<body>
+
+<hr size="1">
+
+<h1>Estimating with Use Cases</h1>
+
+<hr size="1">
+
+<p>In 1993 Gustav Karner of Objectory AB did some research onto estimating man-hours
+for project completion based on use cases as a modification of estimation based on
+function points.</p>
+
+<p>The following is a summary of Karner's work as it appears in
+<a href="#schneider1998">[schneider1998]</a>.
+
+<hr size="1">
+
+<table>
+
+  <tr><td colspan="3"><strong>(1) Weighted Actors</strong></th></tr>
+  <tr>
+    <td width="60%">Total actor weight is the sum of each (actor * weight).</td>
+    <td width="40%" align="right">AW = sum( actor * weight )</td>
+  </tr>
+
+  <tr><td colspan="3"><strong>(2) Weighted Use Cases</strong></th></tr>
+  <tr>
+    <td width="60%">Total use case weight is the sum of each (UC * weight) where
+      use cases may be weighted by either transactions or analysis classes.</td>
+    <td width="40%" align="right">UW = sum( use-case * weight )</td>
+  </tr>
+
+  <tr><td colspan="3"><strong>(3) Unadjusted Use Case Points</strong></th></tr>
+  <tr>
+    <td width="60%"></td>
+    <td width="40%" align="right">UUCP = AW + UW</td>
+  </tr>
+
+  <tr><td colspan="3"><strong>(4) Technical Complexity Factor</strong></th></tr>
+  <tr>
+    <td width="60%">Technical factors are rated on a scale from 0 to 5.  A rating
+      of 0 means the factor is irrelevant to this project, 5 means it is
+      essential.</td>
+    <td width="40%" align="right">
+      TFactor = sum( T * weight )
+      <br>
+      TCF = 0.6 + TFactor/100
+    </td>
+  </tr>
+
+  <tr><td colspan="3"><strong>(5) Environmental Factor</strong></th></tr>
+  <tr>
+    <td width="60%">Environmental factors are rated on a scale from 0 to 5.  See
+      the environmental factor table below for rating details.</td>
+    <td width="40%" align="right">
+      EFactor = sum( E * weight )
+      <br>
+      EF = 1.4 - EFactor * 3/100
+    </td>
+  </tr>
+
+  <tr><td colspan="3"><strong>(6) Aggregate Use Case Points</strong></th></tr>
+  <tr>
+    <td width="60%"></td>
+    <td width="40%" align="right">UCP = UUCP * TCF * EF</td>
+  </tr>
+
+  <tr><td colspan="3"><strong>(7) Project Estimate</strong></th></tr>
+  <tr>
+    <td width="60%">Karner's original suggestion:</td>
+    <td width="40%" align="right">man-hours = UCP * 20 hours</td>
+  </tr>
+
+  <tr><td colspan="3"><strong>(8) Staff training and project stability refinement</strong></th></tr>
+  <tr>
+    <td width="60%">Count E1-E6 that are less than 3.  Count E7-E8 that are above 3.</td>
+    <td width="40%" align="right">TR = sum( E1-E6 &lt; 3 )<br>+ sum( E7-E8 &gt; 3 )</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td width="40%" align="right">if (2 &lt; TR &lt; 5) man-hours = UCP * 28 hours</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td width="40%" align="right">if (5 &lt;= TR) <em>risk of project failure</em></td>
+  </tr>
+
+  <tr><td colspan="3"><strong>(9) Additional Issues</strong></th></tr>
+  <tr>
+    <td width="60%">Don't forget to
+    <ul>
+      <li>Add in time for communication (for large teams)
+      <li>Add in time for working out team issues
+      </ul>
+  </td>
+  </tr>
+
+</table>
+
+<hr size="1">
+
+<h2>Weighting Factor Tables</h2>
+
+<blockquote>
+
+<table border=1>
+  <tr><td><strong>Actor Type</strong></th>	<td><strong>Description</strong></th>					<td><strong>Weight</strong></th></tr>
+  <tr><td>Simple</td>		<td>Program interface</td>				<td>1</td></tr>
+  <tr><td>Average</td>		<td>Interactive, or protocol driven interface</td>	<td>2</td></tr>
+  <tr><td>Complex</td>		<td>Graphical interface</td>				<td>3</td></tr>
+</table>
+
+<p>
+
+<table border=1>
+  <tr><td><strong>Use Case Type</strong></th>	<td><strong>Description</strong></th>					<td><strong>Weight</strong></th></tr>
+  <tr><td>Simple</td>		<td>3 or fewer transactions or
+				    <br>Fewer than 5 analysis classes</td>		<td>5</td></tr>
+  <tr><td>Average</td>		<td>4 to 7 transactions or
+      				    <br>5 to 10 analysis classes</td>			<td>10</td></tr>
+  <tr><td>Complex</td>		<td>More than 7 transactions or
+      				    <br>More than 10 analysis classes</td>		<td>15</td></tr>
+</table>
+
+<p>
+
+<table border=1>
+  <tr><td><strong colspan=2>Technical Complexity Factor</strong></th>
+	  <td colspan=2><strong>Weight</strong></th></tr>
+  <tr><td>T1</td>		<td>Distributed system</td>				<td>2</td></tr>
+  <tr><td>T2</td>		<td>Response or throughput performance objectives</td>	<td>1</td></tr>
+  <tr><td>T3</td>		<td>End-user efficiency (online)</td>			<td>1</td></tr>
+  <tr><td>T4</td>		<td>Complex internal processing</td>			<td>1</td></tr>
+  <tr><td>T5</td>		<td>Code must be reusable</td>				<td>1</td></tr>
+  <tr><td>T6</td>		<td>Easy to install</td>				<td>0.5</td></tr>
+  <tr><td>T7</td>		<td>Easy to use</td>					<td>0.5</td></tr>
+  <tr><td>T8</td>		<td>Portable</td>					<td>2</td></tr>
+  <tr><td>T9</td>		<td>Easy to change</td>					<td>1</td></tr>
+  <tr><td>T10</td>		<td>Concurrent</td>					<td>1</td></tr>
+  <tr><td>T11</td>		<td>Includes special security features</td>		<td>1</td></tr>
+  <tr><td>T12</td>		<td>Provides direct access for third parties</td>	<td>1</td></tr>
+  <tr><td>T13</td>		<td>Special user training facilities are required</td>
+  <td>1</td></tr>
+</table>
+A rating of 0 means the factor is irrelevant to this project, 5 means it is
+essential.
+
+<p>
+
+<table border=1>
+  <tr><td><strong colspan=2>Environmental Factor</strong></th>
+  <td><strong>Weight</strong></th>	<td colspan=2><strong>Scale</strong></th></tr>
+  <tr><td>E1</td> <td>Familiar with unified process</td><td>1.5</td> <td>0-no experience, 5-expert</td></tr>
+  <tr><td>E2</td> <td>Application experience</td>	<td>0.5</td> <td>"</td></tr>
+  <tr><td>E3</td> <td>Object-oriented experience</td>	<td>1</td>   <td>"</td></tr>
+  <tr><td>E4</td> <td>Lead analyst capability</td>	<td>0.5</td> <td>"</td></tr>
+  <tr><td>E5</td> <td>Motivation</td>			<td>1</td>   <td>0-none, 5-high</td></tr>
+  <tr><td>E6</td> <td>Stable requirements</td>		<td>2</td>   <td>0-extremely unstable, 5-unchanging</td></tr>
+  <tr><td>E7</td> <td>Part-time workers</td>		<td>-1</td>  <td>0-none, 5-all</td></tr>
+  <tr><td>E8</td> <td>Difficult programming language</td><td>-1</td> <td>0-easy-to-use, 5-very difficult</td></tr>
+</table>
+
+</blockquote>
+
+<hr size="1">
+
+<h1>References</h1>
+
+<dl>
+  <dt><a name="schneider1998">[schneider1998]</a></dt>
+  <dd>
+      G. Schneider, J. Winters,
+      <em>Applying Use Cases: A Practical Guide</em>,
+      Addison Wesley Longman, Reading MA,
+      1998.
+  </dd>
+</dl>
+
+</body>
+
+</html>
