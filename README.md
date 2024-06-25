@@ -1,5 +1,8 @@
 # "Agile" Estimation - OSN 2024 #
 
+Slides available online: [onetribeyoyo.github.io/osn-2024_agile-estimation](https://onetribeyoyo.github.io/osn-2024_agile-estimation/slides.html)
+
+
 ## Working title: "Agile" estimation - Is it possible to be good at estimating large projects? ##
 
 
